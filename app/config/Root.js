@@ -5,12 +5,13 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import App from '../containers/App';
 import { store, history } from './Store';
+import muiTheme from './Theme';
 
 require('./Bootstrap');
 
 const Root = () => {
     return (
-        <MuiThemeProvider>
+        <MuiThemeProvider muiTheme={muiTheme}>
             <Provider store={store}>
                 <ConnectedRouter history={history}>
                     <Route path="/" component={App} />
