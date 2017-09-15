@@ -34,8 +34,8 @@ Run `npm run production`. The production-ready code will be located under `dist`
 ## Credits 
 
 This project is based on [KleoPetroff/react-webpack-boilerplate](https://github.com/KleoPetroff/react-webpack-boilerplate.git)
-it's an awesome boilerplate for most apps to get start with
+which is an awesome boilerplate for most apps to get start with
 
 ## Licence
 
-_react-webpack-boilerplate_ is available under MIT.
+Headline App is available under MIT.
