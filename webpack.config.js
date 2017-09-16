@@ -4,6 +4,14 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+// Load dotenv
+const dotenv = require('dotenv');
+const dotenvResult = dotenv.config();
+const dotEnvConfig = Object.keys(dotenvResult.parsed).reduce(function (result, key) {
+    result[key] = JSON.stringify(dotenvResult.parsed[key]);
+
+    return result;
+}, {});
 
 const config = {
     devtool: 'eval-source-map',
@@ -26,6 +34,8 @@ const config = {
     },
 
     context: resolve(__dirname, 'app'),
+
+    target: "web",
 
     devServer: {
         hot: true,
@@ -74,10 +84,10 @@ const config = {
     },
 
     plugins: [
-        new webpack.DefinePlugin({
-            __DEV__: true,
-            'process.env.NODE_ENV': JSON.stringify('development'),
-        }),
+        new webpack.DefinePlugin(Object.assign({
+                __DEV__: true,
+                'process.env.NODE_ENV': JSON.stringify('development'),
+            }, dotEnvConfig)),
         new webpack.LoaderOptionsPlugin({
             test: /\.js$/,
             options: {
@@ -100,6 +110,9 @@ const config = {
         new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
         new webpack.HotModuleReplacementPlugin(),
     ],
+    node: {
+        fs: 'empty'
+    }
 };
 
 module.exports = config;

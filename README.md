@@ -1,6 +1,10 @@
 # Headline App
 
-Headline App for code test. 
+Headline App uses [News API](https://newsapi.org/) to list latest news from 70 sources.
+
+## Prerequisite
+
+You need to get an API key from [News API](https://newsapi.org/) and save it into the `.env` file. You can find the example from `.env.example`.
 
 ## Starting the dev server
 

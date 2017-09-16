@@ -3,6 +3,14 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const dotenv = require('dotenv');
+
+const dotenvResult = dotenv.config();
+const dotEnvConfig = Object.keys(dotenvResult.parsed).reduce(function (result, key) {
+    result[key] = JSON.stringify(dotenvResult.parsed[key]);
+
+    return result;
+}, {});
 
 const config = {
     devtool: 'hidden-source-map',
@@ -24,10 +32,10 @@ const config = {
     },
 
     plugins: [
-        new webpack.DefinePlugin({
+        new webpack.DefinePlugin(Object.assign({
             __DEV__: false,
             'process.env.NODE_ENV': JSON.stringify('production'),
-        }),
+        }, dotEnvConfig)),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks: (module) => {
