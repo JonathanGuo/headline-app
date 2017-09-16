@@ -6,21 +6,16 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 const config = {
-    devtool: 'line-cheap-source-map',
+    devtool: 'eval-source-map',
 
     entry: {
         app: [
             'react-hot-loader/patch',
             'webpack-dev-server/client?http://localhost:8080',
             'webpack/hot/only-dev-server',
+            'babel-polyfill',
             './index.js',
             './assets/scss/main.scss',
-        ],
-        vendor: [
-            'babel-polyfill',
-            'react',
-            'redux',
-            'react-redux',
         ],
     },
 
@@ -94,14 +89,11 @@ const config = {
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            minChunks(module) {
+            minChunks: (module) => {
                 return module.context && module.context.indexOf('node_modules') !== -1;
             },
         }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest',
-            minChunks: 1,
-        }),
+        new webpack.optimize.CommonsChunkPlugin({ name: 'manifest' }),
         new webpack.optimize.ModuleConcatenationPlugin(),
         new ExtractTextPlugin({ filename: './styles/style.css', disable: false, allChunks: true }),
         new CopyWebpackPlugin([{ from: 'vendors', to: 'vendors' }]),
