@@ -1,12 +1,12 @@
 export default function news(state = {
     loading: false,
-    news: [],
+    articles: [],
 }, action) {
     switch (action.type) {
         case 'FETCHED_NEWS':
             return {
                 ...state,
-                news: action.data.articles,
+                articles: action.data.articles,
             };
         default:
             return state;

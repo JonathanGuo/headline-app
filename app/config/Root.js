@@ -7,7 +7,6 @@ import App from '../containers/App';
 import { store, history } from './Store';
 import muiTheme from './Theme';
 
-require('./Bootstrap');
 
 const Root = () => {
     return (
