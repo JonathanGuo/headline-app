@@ -4,6 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import AppBar from 'material-ui/AppBar';
 import { action } from '../config/Store';
 import PropTypes from 'prop-types';
+import NewsGrid from '../components/news/NewsGrid';
 
 class App extends Component {
     componentDidMount () {
@@ -17,20 +18,25 @@ class App extends Component {
                     title="Headline"
                     iconElementRight={<FlatButton label="Author" />}
                 />
-                News: { this.props.news.length }
+                <div className="content">
+                    <NewsGrid articles={this.props.articles} />
+                </div>
             </div>
         );
     }
 }
 
 App.propTypes = {
-    news: PropTypes.object,
+    articles: PropTypes.array,
 };
 
 App.defaultProps = {
-    news: [],
+    articles: [],
 };
 
 export default connect((store) => {
-    return { news: store.News };
+    return {
+        articles: store.News.articles,
+        loading: store.News.loading,
+    };
 })(App);
