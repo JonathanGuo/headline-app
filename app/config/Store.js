@@ -33,7 +33,7 @@ if (module.hot) {
     });
 }
 
-const action = type => store.dispatch({ type });
+const action = (type, payload) => store.dispatch({ type, payload });
 
 // Export history and store
 export { history, store, action };

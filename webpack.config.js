@@ -104,6 +104,7 @@ const config = {
             },
         }),
         new webpack.optimize.CommonsChunkPlugin({ name: 'manifest' }),
+        new webpack.NamedModulesPlugin(),
         new webpack.optimize.ModuleConcatenationPlugin(),
         new ExtractTextPlugin({ filename: './styles/style.css', disable: false, allChunks: true }),
         new CopyWebpackPlugin([{ from: 'vendors', to: 'vendors' }]),

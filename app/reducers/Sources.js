@@ -1,29 +1,30 @@
-export default function News(state = {
+export default function Sources(state = {
     loading: false,
-    source: null,
-    articles: [],
+    loaded: false,
     failed: false,
+    sources: [],
 }, action) {
     switch (action.type) {
-        case 'FETCHED_NEWS':
+        case 'FETCHING_SOURCES':
             return {
                 ...state,
-                loading: false,
-                failed: false,
-                articles: action.payload.articles,
-            };
-        case 'FETCHING_NEWS':
-            return {
-                ...state,
-                source: action.payload.source,
+                loaded: false,
                 loading: true,
                 failed: false,
             };
-        case 'FETCH_NEWS_FAILED':
+        case 'FETCHED_SOURCES':
             return {
                 ...state,
+                loaded: true,
                 loading: false,
+                failed: false,
+                sources: action.payload.sources,
+            };
+        case 'FETCH_SOURCES_FAILED':
+            return {
+                ...state,
                 loaded: false,
+                loading: false,
                 failed: true,
             };
         default:

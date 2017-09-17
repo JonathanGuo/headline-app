@@ -7,7 +7,14 @@ export default class News extends Api {
         this.fetch = this.fetch.bind(this);
     }
 
-    fetch () {
-        return this.axios.get('articles?source=reddit-r-all&sortBy=top');
+    fetch (source) {
+        const [sortBy] = source.sortBysAvailable;
+
+        return this.axios.get('articles', {
+            params: {
+                source: source.id,
+                sortBy,
+            },
+        });
     }
 }
