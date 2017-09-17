@@ -3,20 +3,23 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const dotenv = require('dotenv');
+
+const dotenvResult = dotenv.config();
+const dotEnvConfig = Object.keys(dotenvResult.parsed).reduce(function (result, key) {
+    result[key] = JSON.stringify(dotenvResult.parsed[key]);
+
+    return result;
+}, {});
 
 const config = {
-    devtool: 'cheap-module-source-map',
+    devtool: 'hidden-source-map',
 
     entry: {
         app: [
+            'babel-polyfill',
             './index.js',
             './assets/scss/main.scss',
-        ],
-        vendor: [
-            'babel-polyfill',
-            'react',
-            'redux',
-            'react-redux',
         ],
     },
 
@@ -29,20 +32,17 @@ const config = {
     },
 
     plugins: [
-        new webpack.DefinePlugin({
+        new webpack.DefinePlugin(Object.assign({
             __DEV__: false,
-            'process.env.NODE_ENV': 'production',
-        }),
+            'process.env.NODE_ENV': JSON.stringify('production'),
+        }, dotEnvConfig)),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            minChunks(module) {
+            minChunks: (module) => {
                 return module.context && module.context.indexOf('node_modules') !== -1;
             },
         }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest',
-            minChunks: 1,
-        }),
+        new webpack.optimize.CommonsChunkPlugin({ name: 'manifest' }),
         new webpack.optimize.ModuleConcatenationPlugin(),
         new HtmlWebpackPlugin({
             template: `${__dirname}/app/index.html`,
@@ -76,7 +76,12 @@ const config = {
                     fallback: 'style-loader',
                     use: [
                         'css-loader',
-            { loader: 'sass-loader', query: { sourceMap: false } },
+                        {
+                            loader: 'sass-loader',
+                            query: {
+                                sourceMap: false,
+                            },
+                        },
                     ],
                     publicPath: '../',
                 }),

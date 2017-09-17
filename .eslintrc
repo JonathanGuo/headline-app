@@ -19,6 +19,8 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/jsx-indent-props": ["error", 4],
     "react/forbid-prop-types": "off",
+    "react/no-array-index-key": "off",
+    "react/jsx-boolean-value": "off",
     "linebreak-style": "off",
     "global-require": "off",
     "semi": "warn",
@@ -40,6 +42,8 @@
     "no-debugger": "off"
   },
   "globals": {
-    "axios": false
+    "axios": false,
+    "moment": false,
+    "API_KEY": false,
   }
 }
