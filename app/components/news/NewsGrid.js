@@ -20,7 +20,7 @@ class NewsGrid extends PureComponent {
         }
 
         return (
-            <div className="content">
+            <div>
                 {
                     articles.map((article, idx) => (
                         <NewsItem key={idx} article={article} />

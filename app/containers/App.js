@@ -33,6 +33,8 @@ class App extends PureComponent {
                         open={!isEmpty(this.state.errorMessage)}
                         onRequestClose={() => this.setState({ errorMessage: '' })}
                     />
+                    <h2>Source: {this.props.currentSource ? this.props.currentSource.name : 'No source is selected'} </h2>
+                    <p>{this.props.currentSource.description}</p>
                     <NewsGrid
                         articles={this.props.news}
                         loading={this.props.loadingSources || this.props.loadingNews}
@@ -49,10 +51,12 @@ App.propTypes = {
     loadingNews: PropTypes.bool.isRequired,
     loadSourceFailed: PropTypes.bool.isRequired,
     loadNewsFailed: PropTypes.bool.isRequired,
+    currentSource: PropTypes.object,
 };
 
 App.defaultProps = {
     news: [],
+    currentSource: null,
 };
 
 export default connect((store) => {
@@ -63,5 +67,6 @@ export default connect((store) => {
         loadingNews: store.News.loading,
         loadSourceFailed: store.Sources.failed,
         loadNewsFailed: store.News.failed,
+        currentSource: store.News.source,
     };
 })(App);
