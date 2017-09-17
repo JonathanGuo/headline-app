@@ -34,7 +34,7 @@ class App extends PureComponent {
                         onRequestClose={() => this.setState({ errorMessage: '' })}
                     />
                     <h2>Source: {this.props.currentSource ? this.props.currentSource.name : 'No source is selected'} </h2>
-                    <p>{this.props.currentSource.description}</p>
+                    {this.props.currentSource ? <p>this.props.currentSource.description</p> : null }
                     <NewsGrid
                         articles={this.props.news}
                         loading={this.props.loadingSources || this.props.loadingNews}

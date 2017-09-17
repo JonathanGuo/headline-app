@@ -83,6 +83,7 @@ class Header extends PureComponent {
                 />
                 <Drawer
                     open={this.state.drawerOpen}
+                    docked={false}
                     onRequestChange={open => this.setState({ drawerOpen: open })}
                 >
                     <div style={{ textAlign: 'center' }}>
