@@ -57,7 +57,6 @@ const config = {
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,
         }),
-        new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
         new ExtractTextPlugin({ filename: './styles/style.css', disable: false, allChunks: true }),
         new CopyWebpackPlugin([{ from: './vendors', to: 'vendors' }]),
     ],

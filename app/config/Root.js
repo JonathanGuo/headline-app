@@ -6,6 +6,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import { store, history } from './Store';
 import { muiTheme } from './Theme';
 import App from '../containers/App';
+import Header from '../containers/components/Header';
 
 const Root = () => {
     return (
@@ -13,7 +14,8 @@ const Root = () => {
             <Provider store={store}>
                 <ConnectedRouter history={history}>
                     <div>
-                        <Route exact path="/" component={App} />
+                        <Header />
+                        <Route path="/" component={App} />
                     </div>
                 </ConnectedRouter>
             </Provider>

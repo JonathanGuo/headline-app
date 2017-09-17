@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 import NewsGrid from '../components/news/NewsGrid';
-import Header from './components/Header';
 import Modal from '../components/Modal';
 
 class App extends PureComponent {
@@ -26,7 +25,6 @@ class App extends PureComponent {
     render () {
         return (
             <div>
-                <Header />
                 <div className="content">
                     <Modal
                         message={this.state.errorMessage}
