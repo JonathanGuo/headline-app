@@ -14,8 +14,11 @@ const sagaMiddleware = createSagaMiddleware();
 const middlewares = [
     routerMiddleware(history),
     sagaMiddleware,
-    logger,
 ];
+
+if (process.env.NODE_ENV !== 'production') {
+    middlewares.push(logger);
+}
 
 // Create store
 const store = createStore(
